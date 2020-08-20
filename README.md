@@ -1,4 +1,6 @@
-# our configuration
+# My configuration of cgroups: 
+
+after experimenting with pdf-crop-margins large documents with large page sises (6" x 22")
 
 10mb memory out of 16GB and (100)/1024 = 10% of cpu
 ```bash
