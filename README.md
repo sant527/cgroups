@@ -2,14 +2,31 @@
 
 after experimenting with pdf-crop-margins large documents with large page sises (6" x 22")
 
-10mb memory out of 16GB and (100)/1024 = 10% of cpu
+200mb memory out of 16GB and (50)/1024 = 5% of cpu
 ```bash
-best is
+
+MOST IMPORTANT IS cpu.shares 2GB memory or 200MB does not really matter. 2GB little slack but ok.
+NOt too much performance boost.
+
+echo $(( 2 * 1024 * 1024 * 1024 )) > /sys/fs/cgroup/memory/groupname/cpulimited_simha/memory.limit_in_bytes
+echo 10 > /sys/fs/cgroup/cpu/groupname/cpulimited_simha/cpu.shares
+
+THE BEST IS THIS
+
+echo $(( 200 * 1024 * 1024 )) > /sys/fs/cgroup/memory/groupname/cpulimited_simha/memory.limit_in_bytes
+echo 10 > /sys/fs/cgroup/cpu/groupname/cpulimited_simha/cpu.shares
+
+BEST IS
+
+echo $(( 100 * 1024 * 1024 )) > /sys/fs/cgroup/memory/groupname/cpulimited_simha/memory.limit_in_bytes
+echo 50 > /sys/fs/cgroup/cpu/groupname/cpulimited_simha/cpu.shares
+
+VERY SLOW
 
 echo $(( 10 * 1024 * 1024 )) > /sys/fs/cgroup/memory/groupname/cpulimited_simha/memory.limit_in_bytes
 echo 100 > /sys/fs/cgroup/cpu/groupname/cpulimited_simha/cpu.shares
 
-ALSO freezing slightly
+Best (but freezes slighty others)
 
 echo $(( 100 * 1024 * 1024 )) > /sys/fs/cgroup/memory/groupname/cpulimited_simha/memory.limit_in_bytes
 echo 100 > /sys/fs/cgroup/cpu/groupname/cpulimited_simha/cpu.shares
