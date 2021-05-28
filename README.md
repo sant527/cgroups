@@ -3,52 +3,23 @@
 user root
 
 ```
-cgdelete -g memory,cpu:groupname/cpulimited_simha
+# delete the group if already exists
+sudo cgdelete -g memory,cpu:groupname/cpulimited_simha
 
-cgcreate -g memory,cpu:groupname/cpulimited_simha
+# check groupname exists
+ls -al /sys/fs/cgroup/memory/groupname
 
-cd /sys/fs/cgroup/memory/groupname/
+sudo cgcreate -a simha -t simha -g memory,cpu:groupname/cpulimited_simha
 
-total 0
-drwxr-xr-x 3 root root 0 May 28 11:02 .
-dr-xr-xr-x 7 root root 0 May 16 12:11 ..
--rw-r--r-- 1 root root 0 May 28 11:04 cgroup.clone_children
---w--w--w- 1 root root 0 May 28 11:04 cgroup.event_control
--rw-r--r-- 1 root root 0 May 28 11:04 cgroup.procs
-drwxr-xr-x 2 root root 0 May 28 11:04 cpulimited_simha
--rw-r--r-- 1 root root 0 May 28 11:04 memory.failcnt
---w------- 1 root root 0 May 28 11:04 memory.force_empty
--rw-r--r-- 1 root root 0 May 28 11:04 memory.kmem.failcnt
--rw-r--r-- 1 root root 0 May 28 11:04 memory.kmem.limit_in_bytes
--rw-r--r-- 1 root root 0 May 28 11:04 memory.kmem.max_usage_in_bytes
--r--r--r-- 1 root root 0 May 28 11:04 memory.kmem.slabinfo
--rw-r--r-- 1 root root 0 May 28 11:04 memory.kmem.tcp.failcnt
--rw-r--r-- 1 root root 0 May 28 11:04 memory.kmem.tcp.limit_in_bytes
--rw-r--r-- 1 root root 0 May 28 11:04 memory.kmem.tcp.max_usage_in_bytes
--r--r--r-- 1 root root 0 May 28 11:04 memory.kmem.tcp.usage_in_bytes
--r--r--r-- 1 root root 0 May 28 11:04 memory.kmem.usage_in_bytes
--rw-r--r-- 1 root root 0 May 28 11:04 memory.limit_in_bytes
--rw-r--r-- 1 root root 0 May 28 11:04 memory.max_usage_in_bytes
--rw-r--r-- 1 root root 0 May 28 11:04 memory.memsw.failcnt
--rw-r--r-- 1 root root 0 May 28 11:04 memory.memsw.limit_in_bytes
--rw-r--r-- 1 root root 0 May 28 11:04 memory.memsw.max_usage_in_bytes
--r--r--r-- 1 root root 0 May 28 11:04 memory.memsw.usage_in_bytes
--rw-r--r-- 1 root root 0 May 28 11:04 memory.move_charge_at_immigrate
--r--r--r-- 1 root root 0 May 28 11:04 memory.numa_stat
--rw-r--r-- 1 root root 0 May 28 11:04 memory.oom_control
----------- 1 root root 0 May 28 11:04 memory.pressure_level
--rw-r--r-- 1 root root 0 May 28 11:04 memory.soft_limit_in_bytes
--r--r--r-- 1 root root 0 May 28 11:04 memory.stat
--rw-r--r-- 1 root root 0 May 28 11:04 memory.swappiness
--r--r--r-- 1 root root 0 May 28 11:04 memory.usage_in_bytes
--rw-r--r-- 1 root root 0 May 28 11:04 memory.use_hierarchy
--rw-r--r-- 1 root root 0 May 28 11:04 notify_on_release
--rw-r--r-- 1 root root 0 May 28 11:03 tasks
+# check groupname exists
+ls -al /sys/fs/cgroup/memory/groupname
 
-export TMP="custompath/where/thereis/lotofspace/tmp
+# where ppm files will be saved, the normal /tmp does not have so much space
+export TMP="/home/simha_personal_data/programming_arch_firefox/extra/Unsorted/vid/tmp"
+printenv TMP
 
-THIS IS THE BEST (.ppm files are made veryfast) (but slight throttling for other applications)
-2GB memory out of 12GB and (10)/1024 = 1% of cpu
+#THIS IS THE BEST (.ppm files are made veryfast) (but slight throttling for other applications)
+#2GB memory out of 12GB and (10)/1024 = 1% of cpu
 
 echo $(( 2 * 1024 * 1024 * 1024 )) > /sys/fs/cgroup/memory/groupname/cpulimited_simha/memory.limit_in_bytes
 echo 10 > /sys/fs/cgroup/cpu/groupname/cpulimited_simha/cpu.shares
