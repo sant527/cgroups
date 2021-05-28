@@ -45,9 +45,24 @@ drwxr-xr-x 2 root root 0 May 28 11:04 cpulimited_simha
 -rw-r--r-- 1 root root 0 May 28 11:04 notify_on_release
 -rw-r--r-- 1 root root 0 May 28 11:03 tasks
 
+export TMP="custompath/where/thereis/lotofspace/tmp
+
+THIS IS THE BEST (.ppm files are made veryfast) (but slight throttling for other applications)
+2GB memory out of 12GB and (10)/1024 = 1% of cpu
+
+echo $(( 2 * 1024 * 1024 * 1024 )) > /sys/fs/cgroup/memory/groupname/cpulimited_simha/memory.limit_in_bytes
+echo 10 > /sys/fs/cgroup/cpu/groupname/cpulimited_simha/cpu.shares
+
+then
+
+cgexec -g memory,cpu:groupname/cpulimited_simha pdf-crop-margins -v -p4 100 0 100 100 Adi_khanda_only_top.pdf
+
 ```
 
 # My configuration of cgroups: 
+
+# export TMP="custompath/where/thereis/lotofspace/tmp
+
 
 after experimenting with pdf-crop-margins large documents with large page sises (6" x 22") and want to crop the white margins.
 
